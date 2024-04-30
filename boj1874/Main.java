@@ -8,7 +8,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
 
         int n = scan.nextInt();
-        int[]nums = new int[n];
+        int[] nums = new int[n];
         int idx = 0;
         int k = 0;
         List<String> result = new ArrayList<>();
@@ -28,23 +28,22 @@ public class Main {
             }
 
             if((!stack.isEmpty()) && stack.peek() == nums[idx]) {
+//                System.out.println(stack.peek());
                 stack.pop();
                 result.add("-");
                 idx++;
-            } else if((!stack.isEmpty()) && stack.peek() < nums[idx]) {
+            } else if((!stack.isEmpty()) && stack.peek() < nums[idx]) { // 2 < 4 k 6
                 k++;
                 stack.push(k);
                 result.add("+");
             } else {
-                System.out.println("No");
-                break;
+//                result.clear();
+                result.add("NO");
+                return;
             }
         }
-
-        if(idx == n) {
-            for (String i : result) {
-                System.out.println(i);
-            }
+        for (String i : result) {
+            System.out.println(i);
         }
     }
 }
