@@ -1,7 +1,7 @@
 package boj2589;
 
 import java.util.*;
-public class Main {
+public class Main3 {
 
     static int row;
     static int col;
@@ -52,10 +52,10 @@ public class Main {
                 }
             }
         }
-        System.out.println(result - 1);
+        System.out.println(result-1);
     }
     public static int bfs(int x, int y){
-        int answer = 0;
+        int cnt = 0;
         Queue<Pair> q = new LinkedList<>();
         q.offer(new Pair(x, y));
         visit[x][y] = true;
@@ -77,8 +77,9 @@ public class Main {
                     }
                 }
             }
-           answer++;
+            cnt++;
         }
-        return answer;
+        return cnt;
     }
 }
+

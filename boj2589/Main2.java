@@ -1,7 +1,7 @@
 package boj2589;
 
 import java.util.*;
-public class Main {
+public class Main2 {
 
     static int row;
     static int col;
@@ -17,9 +17,12 @@ public class Main {
         int x;
         int y;
 
-        public Pair(int x, int y) {
+        int cnt;
+
+        public Pair(int x, int y, int cnt) {
             this.x = x;
             this.y = y;
+            this.cnt = cnt;
         }
     }
 
@@ -45,24 +48,23 @@ public class Main {
 
         for(int i = 1; i <= row; i++) {
             for(int j = 1; j <= col; j++) {
-                visit = new boolean[row+1][col+1];
                 if(graph[i][j] == 'L') {
+
                     int temp = bfs(i, j);
                     result = Math.max(result, temp);
                 }
             }
         }
-        System.out.println(result - 1);
+        System.out.println(result);
     }
     public static int bfs(int x, int y){
-        int answer = 0;
+        int max = 0;
         Queue<Pair> q = new LinkedList<>();
-        q.offer(new Pair(x, y));
+        q.offer(new Pair(x, y, 0));
         visit[x][y] = true;
 
         while(!q.isEmpty()) {
-            int len = q.size();
-            for(int i = 0; i < len; i++) {
+            for(int i = 0; i < q.size(); i++) {
                 Pair nums = q.poll();
 
                 for(int j = 0; j < 4; j++) {
@@ -72,13 +74,14 @@ public class Main {
                     if(nx > 0 && ny > 0 && nx <= row && ny <= col) {
                         if(!visit[nx][ny] && graph[nx][ny] == 'L') {
                             visit[nx][ny] = true;
-                            q.offer(new Pair(nx, ny));
+                            q.offer(new Pair(nx, ny, nums.cnt+1));
+                            max = Math.max(max, nums.cnt+1);
                         }
                     }
                 }
             }
-           answer++;
         }
-        return answer;
+        visit = new boolean[row+1][col+1];
+        return max;
     }
 }
