@@ -20,12 +20,23 @@ public class Main {
                 continue;
             }
 
-            for(int j = 2; j < i; j++) {
+//            for(int j = 2; j < i; j++) { // 기존의 시간초과 나는 풀이
+//
+//                if((i % j) == 0)  // i 보다 작은 j들로 나머지 구하기
+//                {
+//                    value = true; // 나머지가 있으면 소수가 아님
+//                    break;
+//                }
+//            }
+
+            for(int j = 2; j <= Math.sqrt(i); j++) {
                 if((i % j) == 0)  // i 보다 작은 j들로 나머지 구하기
                 {
                     value = true; // 나머지가 있으면 소수가 아님
+                    break;
                 }
             }
+
             if(!value) System.out.println(i); // 소수만 출력
 
         }
