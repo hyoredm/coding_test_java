@@ -3,7 +3,9 @@ package boj1707;
 import java.util.*;
 public class Main {
 
-    static boolean[] visit;
+    static List<Boolean> visit = new ArrayList<>();
+
+//    static boolean[] visit;
     static int[][] graph;
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -14,7 +16,7 @@ public class Main {
             int V = scan.nextInt();
             int E = scan.nextInt();
 
-            visit = new boolean[V+1];
+//            visit = new boolean[V+1];
             graph = new int[V+1][V+1];
 
             for(int j = 0; j < E; j++) {
@@ -27,10 +29,13 @@ public class Main {
             int cnt = 0;
 
             for(int j = 1; j <= E; j++) {
-                if(!visit[j]) {
-                    System.out.println("진입 : " + j);
+                if(!visit.get(j)) {
+//                    System.out.println("진입 : " + j);
                     dfs(V, j);
                     cnt++;
+                    if(cnt > 1) {
+                        break;
+                    }
                 }
             }
 
@@ -41,13 +46,12 @@ public class Main {
                 System.out.println("NO");
             }
         }
-
     }
 
     static void dfs(int V, int start) {
-        visit[start] = true;
+        visit.set(start, true);
         for(int i = 1; i <= V; i++) {
-            if(!visit[i] && graph[start][i] == 1) {
+            if(!visit.get(i) && graph[start][i] == 1) {
                 dfs(V, i);
             }
         }
