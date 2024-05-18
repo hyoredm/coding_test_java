@@ -8,28 +8,42 @@ class Solution {
 
         Queue<Integer> q = new LinkedList<>();
 
+        Queue<Integer> loc = new LinkedList<>();
+
         for(int i = 0; i < priorities.length; i++) {
             q.add(priorities[i]);
         }
 
-        int target = priorities[location];
+        for(int i = 0; i < priorities.length; i++) {
+            if(i == location) {
+                loc.add(1);
+            } else {
+                loc.add(0);
+            }
+
+        }
 
         Arrays.sort(priorities);
 
-        for(int i = priorities.length-1; i <= 0; i--) {
-            if(!q.isEmpty()) {
+        int i = priorities.length-1;
+
+        while(i >= 0) {
+            if(!q.isEmpty() && !loc.isEmpty()) {
                 if(q.peek() == priorities[i]) {
-                    if(q.peek() == target) {
-                        q.poll();
+                    if(loc.peek() == 1) {
                         answer++;
                         break;
                     } else {
                         q.poll();
+                        loc.poll();
                         answer++;
+                        i--;
                     }
                 } else {
-                    int tmp = q.poll();
-                    q.add(tmp);
+                    int temp = q.poll();
+                    q.add(temp);
+                    int temp2 = loc.poll();
+                    loc.add(temp2);
                 }
             }
         }
