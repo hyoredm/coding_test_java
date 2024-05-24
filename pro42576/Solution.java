@@ -27,9 +27,6 @@ class Solution {
             answer = entrySet.getValue();
         }
 
-
-
-
         return answer;
     }
 }
