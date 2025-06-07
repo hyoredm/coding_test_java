@@ -21,26 +21,37 @@ class Solution {
         boolean flag = true;
 
         if(p != null && q != null) {
-            if(p.val != q.val) flag = false;
+            if (p.val != q.val) flag = false;
 
-            if(p.left != null && q.left != null) {
-                if(p.left.val != q.left.val) flag = false;
-            }
-            else if(p.left == null && q.left != null) {
-                flag = false;
-            }
-            else if(p.left != null && q.left == null) {
-                flag = false;
+            TreeNode pLft = p;
+            TreeNode qLft = q;
+            TreeNode pRt = p;
+            TreeNode qRt = q;
+
+            while (pLft.left != null || qLft.left != null) {
+                if (pLft.left != null && qLft.left != null) {
+                    if (pLft.left.val != qLft.left.val) return flag = false;
+                } else if (pLft.left == null && qLft.left != null) {
+                    return flag = false;
+                } else if (pLft.left != null && qLft.left == null) {
+                    return flag = false;
+                } else if (pLft.left == null && qLft.left == null) {
+                    return flag = false;
+                }
+                pLft = pLft.left;
+                qLft = qLft.left;
             }
 
-            if(p.right != null && q.right != null) {
-                if(p.right.val != q.right.val) flag = false;
-            }
-            else if(p.right == null && q.right != null) {
-                flag = false;
-            }
-            else if(p.right != null && q.right == null) {
-                flag = false;
+            while (pRt.right != null || qRt.right != null) {
+                if (pRt.right != null && qRt.right != null) {
+                    if (pRt.right.val != qRt.right.val) flag = false;
+                } else if (pRt.right == null && qRt.right != null) {
+                    flag = false;
+                } else if (pRt.right != null && qRt.right == null) {
+                    flag = false;
+                }
+                pRt = pRt.left;
+                qRt = qRt.left;
             }
         }
         else if(p == null && q!= null) {
