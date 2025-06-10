@@ -3,6 +3,7 @@ package leetcode104;
 class Solution {
     int depth = 0;
     public int maxDepth(TreeNode root) {
+
         if(root == null) return depth;
         depth++;
         int lftDepth = maxDepth(root.left);
